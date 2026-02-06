@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone Paper Scissor</title>
+    <style>
+        
+        .main{
+            background-color: rgb(71, 39, 94);
+            text-align: center;
+            color: white;
+            padding: 10px;
+            max-height: 90%;
+            max-width: 60%;
+            margin: 20px 0 0 250px;
+            position: relative;
+            border-radius: 10px;
+            
+            
+        }
+        .container{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+             }
+        #emoji{
+            height: 120px;
+            width: 120px;
+            font-size: 80px;
+            margin: 0 10px;
+            border-radius: 25%;
+            cursor: pointer;
+           
+        }
+        #emoji:hover{
+             background-color: black;
+             box-shadow: 0 0 10px aqua;
+             transform: scale(1.1);
+        }
+        #user{
+            position: absolute;
+            left: 230px;
+        }
+        #computer{
+            position: absolute;
+            left: 500px;
+        }
+        #result{
+            margin: 80px 0 10px 10px;
+        }
+         #user-score{
+            position: absolute;
+            left: 230px;
+        }
+        #computer-score{
+            position: absolute;
+            left: 500px;
+        }
+        #tie{
+            margin: 80px 0 10px 10px;
+        }
+        .btn{
+            height: 50px;
+            width: 120px;
+            margin: 10px 20px;
+            font-size: larger;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .btn:hover{
+             background-color: black;
+             box-shadow: 0 0 10px aqua;
+             transform: scale(1.1);
+             color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+    <h1>Lets Play Stone Paper Scissor Game...!</h1>
+    <div class="container">
+        <button onclick="playgame('stone')" id="emoji">✊</button>
+        <button onclick="playgame('paper')" id="emoji">🖐</button>
+        <button onclick="playgame('scissor')" id="emoji">✌</button>
+    </div>
+    <h3 id="user" class="h3">User :</h3>
+    <h3 id="computer" class="h3">Computer :</h3>
+    <h3 id="result" class="h3">Result :</h3>
+    <h3 id="user-score" class="h3">User Score :</h3>
+    <h3 id="computer-score" class="h3">Computer Score :</h3>
+    <h3 id="tie">Tie:</h3>
+    <button onclick="restart()" class="btn">Restart</button>
+    <button onclick="final()" class="btn">Final Result</button>
+     <h3 id="finalr"></h3>
+    </div>
+
+    <script>
+
+
+        let user=document.getElementById('user'),
+            computer=document.getElementById('computer'),
+            result=document.getElementById('result'),
+            scoreofuser=document.getElementById('user-score'),
+            scoreofcomputer=document.getElementById('computer-score'),
+            tie=document.getElementById('tie'),
+            finalr=document.getElementById('finalr');
+
+
+            let res='';
+            let stone='stone';
+            let paper='paper';
+            let scissor='scissor';
+            let score1='';
+            let score2='';
+            let score3='';
+            let value='';
+            let finalres='';
+
+            function playgame(value){
+            let game=['stone','paper','scissor'];
+            let computertern=game[Math.floor(Math.random()*3)];
+            computer.textContent=`Computer :- ${computertern}`;
+            computer.style.color='red';
+            user.textContent=`User :- ${value}`;
+            user.style.color='aqua';
+             
+            if(value===computertern){
+                res='Its Tie....'
+                result.style.color='rgb(3, 255, 3)';
+            }else if(value==stone && computertern==paper){
+                res='Computer Wins..!'
+                result.style.color='red';
+            }else if(value==stone && computertern==scissor){
+                res='You Win..!'
+                result.style.color='aqua';
+            }else if(value==paper && computertern==scissor){
+                res='Computer Wins..!'
+                 result.style.color='red';
+            }else if(value==paper && computertern==stone){
+                res='You Win..!'
+                result.style.color='aqua';
+            }else if(value==scissor && computertern==paper){
+                res='You Win..!'
+                result.style.color='aqua';
+            }else if(value==scissor && computertern==stone){
+                res='Computer Wins..!'
+                 result.style.color='red';
+            }
+            result.textContent=`Result :- ${res}`;
+            
+
+            if(res==='You Win..!'){
+                score1++;
+                
+            }else if(res==='Computer Wins..!'){
+                score2++;
+                 }else{
+                    score3++;
+                 }
+           
+            scoreofcomputer.textContent=`Computer score : ${score2}`;
+            scoreofcomputer.style.color='red';
+            scoreofuser.innerText=`User score : ${score1}`;
+            scoreofuser.style.color='aqua';
+            tie.innerText=`Match Tie : ${score3}`;
+            tie.style.color='rgb(3, 255, 3)'
+            
+            } 
+
+            function restart(){
+                location.reload();
+            }
+
+            function final(){
+                if(score1 > score2){
+                    finalres= `Final Result :- You Wins With ${score1-score2}`;
+                     finalr.innerText=finalres;
+                     finalr.style.color='aqua';
+                }else if(score1 < score2){
+                    finalres= `Final Result :- Computer Wins With ${score2-score1}`;
+                    finalr.innerText=finalres;
+                    finalr.style.color='red';
+                }else{
+                    finalres= `Final Result :- Its Tie`;
+                     finalr.innerText=finalres;
+                     finalr.style.color='rgb(3, 255, 3)';
+                }
+                
+            }
+
+
+
+    </script>
+</body>
+</html>
